@@ -1,0 +1,7 @@
+src/deepscan
+src/test
+src/test.nim
+src/dicts/test
+src/dicts/test.nim
+src/tools/test
+src/tools/test.nim
