@@ -16,4 +16,6 @@ proc main() =
       tel = true
     else:
       echo ("Try --help\n")
+  while true:
+    echo genAddr()
 main()

@@ -3,7 +3,7 @@ import random, strutils
 var
   badAddr: seq[string]
 
-badAddr = @["10", "127", "192", "224", "240"]
+badAddr = @["10", "127", "224", "240"]
 
 proc genAddr*(): string =
   randomize()
@@ -15,4 +15,7 @@ proc genAddr*(): string =
   for i, v in badAddr:
     if intToStr(ip0) == v:
       ip0 = rand(1..255)
-  return (join([$ip0, $ip1, $ip2, $ip3], "."))
+    elif intToStr(ip0) == "192" and intToStr(ip1) == "168":
+      ip1 = rand(255)
+    else:
+      return (join([$ip0, $ip1, $ip2, $ip3], "."))
