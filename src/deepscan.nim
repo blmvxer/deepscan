@@ -8,14 +8,22 @@ var
 ssh = false
 tel = false
 
-proc main() =
+proc argParser(service: string): bool =
   for arg in arguments:
-    if "--ssh" in arg:
+    if "--ssh" in arg and service == "ssh":
       ssh = true
-    elif "--telnet" in arg:
+      return true
+    elif "--telnet" in arg and service == "tel":
       tel = true
+      return true
     else:
       echo ("Try --help\n")
-  while true:
-    echo genAddr()
+      return false
+
+proc main() =
+  if argParser("ssh") == true:
+    while true:
+      discard testSSH(genAddr(), "exploit")
+  else:
+    quit(0)
 main()
