@@ -23,6 +23,8 @@ proc testTestService() =
   var
     host = "172.217.164.110"
   for service in services:
+    echo service
+    echo useService(service)
     testService(host, service)
   echo "\n"
 

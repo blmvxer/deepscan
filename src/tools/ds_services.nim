@@ -34,24 +34,26 @@ proc readServices*() {.discardable.} =
   except:
     echo getCurrentExceptionMsg()
   finally:
-    echo("debug...")
     fp.close()
 
 proc useService*(service: string): seq[string] {.discardable.} =
-  servicePayload = sanitizeSeq(servicePayload)
   count = 0
   servLen = serviceList.len()
   try:
-    if service == serviceList[count]:
-      servicePayload.add(service)
-      if servicePorts[count].contains(','):
-        servicePayload.add(servicePorts[count].split(',')[0])
-        servicePayload.add(servicePorts[count].split(',')[1])
+    servicePayload = sanitizeSeq(servicePayload)
+    for services in serviceList:
+      if service == services:
+        servicePayload.add(service)
+        if servicePorts[count].contains(','):
+          servicePayload.add(servicePorts[count].split(',')[0])
+          servicePayload.add(servicePorts[count].split(',')[1])
+        else:
+         servicePayload.add(servicePorts[count])
       else:
-       servicePayload.add(servicePorts[count])
-    else:
-      count = count + 1
+        count = count + 1
   except:
     echo getCurrentExceptionMsg()
   finally:
+    servicePorts = sanitizeSeq(servicePorts)
+    serviceList = sanitizeSeq(serviceList)
     return servicePayload

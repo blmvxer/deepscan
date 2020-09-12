@@ -23,11 +23,12 @@ proc connectService(host: string, service: string, port: int) =
   finally:
     sock.close()
 
-proc testService*(host: string, service: string) = 
+proc testService*(host: string, service: string) =
+  readServices() 
   servPort = checkService(service)
   if servPort.len == 3:
-    for port in servPort:
-      connectService(host, service, parseInt(port))
+    connectService(host, service, parseInt(servPort[1]))
+    connectService(host, service, parseInt(servPort[2]))
   else:
     connectService(host, service, parseInt(servPort[1]))
 
