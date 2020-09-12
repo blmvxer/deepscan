@@ -4,6 +4,7 @@ var
   arguments = commandLineParams()
   ssh: bool
   tel: bool
+  port: int
 
 ssh = false
 tel = false
@@ -12,6 +13,7 @@ proc argParser(service: string): bool =
   for arg in arguments:
     if "--ssh" in arg and service == "ssh":
       ssh = true
+      port = 22
       return true
     elif "--telnet" in arg and service == "tel":
       tel = true
@@ -23,7 +25,7 @@ proc argParser(service: string): bool =
 proc main() =
   if argParser("ssh") == true:
     while true:
-      discard testSSH(genAddr(), "exploit")
+      discard testService(genAddr(), "ssh", port)
   else:
     quit(0)
 main()
