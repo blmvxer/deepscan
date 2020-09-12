@@ -1,4 +1,4 @@
-import strutils, streams
+import strutils, streams, sequtils
 
 var
   serviceList*: seq[string]
@@ -8,6 +8,13 @@ var
   count: int
   servLen: int
 
+servicePayload = @[]
+
+proc sanitizeSeq*(dirty: seq[string]): seq[string] =
+  if dirty.len != 0:
+    return @[]
+  else:
+    return dirty
 
 proc readServices*() {.discardable.} =
   var
@@ -28,7 +35,7 @@ proc readServices*() {.discardable.} =
 
 proc useService*(service: string): seq[string] {.discardable.} =
   readServices()
-  servicePayload = @[]
+  servicePayload = sanitizeSeq(servicePayload)
   count = 0
   servLen = serviceList.len()
   try:

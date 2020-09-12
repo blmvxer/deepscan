@@ -25,10 +25,10 @@ proc connectService(host: string, service: string, port: int) =
 
 proc testService*(host: string, service: string) = 
   servPort = checkService(service)
-  if servPort.len == 2:
+  if servPort.len == 3:
     for port in servPort:
       connectService(host, service, parseInt(port))
   else:
-    connectService(host, service, parseInt(servPort[0]))
+    connectService(host, service, parseInt(servPort[1]))
 
 
