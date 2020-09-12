@@ -1,5 +1,4 @@
-import nativesockets, net, strutils, sequtils
-import ../tools/ds_addr, fab
+import nativesockets, net, fab
 
 
 proc testService*(host: string, service: string, port: int): string =
