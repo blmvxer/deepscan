@@ -1,9 +1,11 @@
 import strutils, streams, sequtils
 
+const
+  serviceDir* = "../dicts/services.cfg"
+
 var
   serviceList*: seq[string]
   servicePorts*: seq[string]
-  serviceDir = "../dicts/services.cfg"
   servicePayload*: seq[string]
   count: int
   servLen: int
@@ -31,10 +33,11 @@ proc readServices*() {.discardable.} =
         servicePorts.add(line.split(':')[1])
   except:
     echo getCurrentExceptionMsg()
-
+  finally:
+    echo("debug...")
+    fp.close()
 
 proc useService*(service: string): seq[string] {.discardable.} =
-  readServices()
   servicePayload = sanitizeSeq(servicePayload)
   count = 0
   servLen = serviceList.len()
