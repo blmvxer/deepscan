@@ -14,3 +14,5 @@ proc testService*(host: string, service: string, port: int): string =
     yellow("SSH Version: " & ver)
   except:
     red("[!] " & getCurrentExceptionMsg() & "\n")
+  finally:
+    sock.close()
