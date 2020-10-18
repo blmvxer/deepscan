@@ -5,3 +5,5 @@ src/dicts/test
 src/dicts/test.nim
 src/tools/test
 src/tools/test.nim
+src/tools/debug_ds.nim
+src/tools/debug_ds

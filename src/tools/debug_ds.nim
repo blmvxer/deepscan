@@ -4,7 +4,7 @@ var
   services: seq[string]
   arguments = commandLineParams()
 
-services = @["ftp", "ssh", "telnet", "winbox"]
+services = @["ssh", "winbox"]
 
 proc help() =
   echo ("Commands: --test-useserv, --test-testserv , --test-servconf")
@@ -21,7 +21,7 @@ proc testUseService() =
 proc testTestService() =
   echo ("Debug: Testing testService(host, service)\n")
   var
-    host = "172.217.164.110"
+    host = genAddr()
   for service in services:
     echo service
     echo useService(service)
@@ -50,7 +50,8 @@ for arg in arguments:
   if "--test-useserv" in arg:
     testUseService()
   elif "--test-testserv" in arg:
-    testTestService()
+    while true:
+      testTestService()
   elif "--test-servconf" in arg:
     testServConf()
   elif "--test-all" in arg:

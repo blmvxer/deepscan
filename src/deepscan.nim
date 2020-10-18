@@ -2,9 +2,6 @@ import tools/ds_import, os, strutils
 
 var
   arguments = commandLineParams()
-  ssh: bool
-  tel: bool
-  port: int
   service: string
 
 proc argParser(): bool =

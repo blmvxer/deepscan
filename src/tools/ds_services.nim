@@ -1,7 +1,7 @@
 import strutils, streams, sequtils
 
 const
-  serviceDir* = "../dicts/services.cfg"
+  serviceDir* = "dicts/services.cfg"
 
 var
   serviceList*: seq[string]

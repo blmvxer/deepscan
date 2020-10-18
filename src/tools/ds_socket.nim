@@ -1,4 +1,4 @@
-import nativesockets, net, fab, strutils
+import nativesockets, net, fab, strutils, os
 import ds_services
 var
   servPort: seq[string]
@@ -17,6 +17,7 @@ proc connectService(host: string, service: string, port: int) =
     green("[+] Connected!\n")
     ver = recvLine(sock, 250)
     yellow("SSH Version: " & ver)
+    sleep(10)
 
   except:
     red("[!] " & getCurrentExceptionMsg() & "\n")
